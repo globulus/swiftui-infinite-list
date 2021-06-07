@@ -7,14 +7,14 @@ where Data: RandomAccessCollection, Data.Element: Hashable, Content: View, Loadi
     @Binding var isLoading: Bool
     let loadingView: LoadingView
     let loadMore: () -> Void
-    let onRefresh: OnRefresh
+    let onRefresh: OnRefresh?
     let content: (Data.Element) -> Content
         
     public init(data: Binding<Data>,
          isLoading: Binding<Bool>,
          loadingView: LoadingView,
          loadMore: @escaping () -> Void,
-         onRefresh: @escaping OnRefresh,
+         onRefresh: OnRefresh? = nil,
          @ViewBuilder content: @escaping (Data.Element) -> Content) {
         _data = data
         _isLoading = isLoading
@@ -25,9 +25,15 @@ where Data: RandomAccessCollection, Data.Element: Hashable, Content: View, Loadi
     }
     
     public var body: some View {
-        RefreshableScrollView(onRefresh: onRefresh) {
-            scrollableContent
-                .onAppear(perform: loadMore)
+        if onRefresh != nil {
+            RefreshableScrollView(onRefresh: onRefresh!) {
+                scrollableContent
+                    .onAppear(perform: loadMore)
+            }
+        } else {
+            List {
+                listItems
+            }.onAppear(perform: loadMore)
         }
     }
     
