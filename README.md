@@ -5,7 +5,7 @@ Infinite scrolling list in SwiftUI:
 * A single view, that can be used just like any other List.
 * Renders data from a collection via a ViewBuilder and triggers loading when the list is scrolled to the bottom.
 * Customizable loading view (spinner).
-* Built-in [pull-to-refresh functionality](https://github.com/globulus/swiftui-pull-to-refresh).
+* Built-in [pull-to-refresh functionality](https://github.com/globulus/swiftui-pull-to-refresh) - set `onRefresh` callback to enable.
 
 ![in action](https://swiftuirecipes.com/user/pages/01.blog/infinite-scroll-list-in-swiftui/ezgif-7-f83ec7550e4e.gif)
 
